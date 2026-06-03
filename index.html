@@ -1,0 +1,977 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#14141a">
+<title>Edital Inteligente — análise automatizada de editais de fomento com IA</title>
+<meta name="description" content="A IA da Garagem lê o edital, cruza com o seu perfil técnico e devolve um veredito em semáforo com próximos passos. Pare de perder tempo lendo PDF de 80 páginas.">
+<meta property="og:title" content="Edital Inteligente — análise de editais com IA">
+<meta property="og:description" content="Upload do edital. IA analisa em 5 eixos. Veredito em semáforo. Próximos passos prontos.">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/svg+xml" href="brand/gradient-symbol.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Funnel+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #14141a;
+    --bg-elev: #1c1c25;
+    --bg-card: #21212c;
+    --ink: #F8F1FE;
+    --ink-dim: #b8b0c4;
+    --ink-mute: #8a8398;
+    --primary: #D93030;
+    --secondary: #EA348B;
+    --gradient: linear-gradient(135deg, #EA348B 0%, #D93030 100%);
+    --gradient-soft: linear-gradient(135deg, rgba(234, 52, 139, 0.12) 0%, rgba(217, 48, 48, 0.12) 100%);
+    --border: rgba(248, 241, 254, 0.08);
+    --border-strong: rgba(248, 241, 254, 0.16);
+    --shadow-glow: 0 20px 60px -20px rgba(217, 48, 48, 0.4);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Funnel Display', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== TYPOGRAPHY ===== */
+  .display {
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+
+  .gradient-text {
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(20, 20, 26, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 18px 0;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .logo img {
+    width: 32px;
+    height: 32px;
+  }
+
+  .logo-text { color: var(--ink); }
+  .logo-text .accent { background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+
+  nav ul {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+    align-items: center;
+  }
+
+  nav a {
+    font-size: 14px;
+    color: var(--ink-dim);
+    transition: color 0.2s;
+  }
+  nav a:hover { color: var(--ink); }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 22px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+    white-space: nowrap;
+  }
+
+  .btn-primary {
+    background: var(--gradient);
+    color: var(--ink);
+    box-shadow: var(--shadow-glow);
+    position: relative;
+  }
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 24px 70px -18px rgba(217, 48, 48, 0.55);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid var(--border-strong);
+  }
+  .btn-ghost:hover { background: rgba(248, 241, 254, 0.05); border-color: var(--ink-dim); }
+
+  .btn-lg { padding: 16px 32px; font-size: 14px; }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    padding: 88px 0 96px;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -200px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 600px;
+    background: radial-gradient(ellipse at center, rgba(234, 52, 139, 0.18) 0%, rgba(217, 48, 48, 0.08) 35%, transparent 70%);
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 880px;
+    margin: 0 auto;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 16px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    font-size: 12px;
+    color: var(--ink-dim);
+    margin-bottom: 28px;
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .pill-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 12px #22c55e;
+  }
+
+  .hero h1 {
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: clamp(36px, 6vw, 68px);
+    line-height: 1;
+    letter-spacing: -0.015em;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 .line { display: block; }
+
+  .hero-sub {
+    font-size: clamp(17px, 2vw, 21px);
+    color: var(--ink-dim);
+    max-width: 680px;
+    margin: 0 auto 40px;
+    line-height: 1.5;
+  }
+
+  .hero-sub strong { color: var(--ink); font-weight: 500; }
+
+  .hero-ctas {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 56px;
+  }
+
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    color: var(--ink-mute);
+    font-size: 13px;
+    flex-wrap: wrap;
+  }
+  .hero-meta .dot { width: 4px; height: 4px; border-radius: 50%; background: var(--ink-mute); }
+
+  /* ===== SECTION BASE ===== */
+  section { padding: 88px 0; }
+  .section-head {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 56px;
+  }
+  .eyebrow {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--secondary);
+    margin-bottom: 14px;
+    font-weight: 600;
+  }
+  .section-head h2 {
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 16px;
+  }
+  .section-head p {
+    color: var(--ink-dim);
+    font-size: 17px;
+  }
+
+  /* ===== STATS ===== */
+  .stats {
+    background: var(--bg-elev);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 56px 0;
+  }
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+    text-align: center;
+  }
+  .stat-num {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: clamp(36px, 5vw, 56px);
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+  .stat-label {
+    font-size: 13px;
+    color: var(--ink-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: 'Orbitron', sans-serif;
+  }
+
+  /* ===== HOW IT WORKS ===== */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  .step {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 28px;
+    position: relative;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .step:hover {
+    border-color: var(--border-strong);
+    transform: translateY(-3px);
+  }
+  .step-num {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: 56px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+  .step h3 {
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 18px;
+    margin-bottom: 12px;
+    letter-spacing: 0.01em;
+  }
+  .step p {
+    color: var(--ink-dim);
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  /* ===== SEMAFORO ===== */
+  .semaforo-section {
+    background: var(--bg-elev);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .semaforo-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 16px;
+  }
+  .verdict {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 20px;
+    text-align: center;
+    transition: transform 0.25s, border-color 0.25s;
+  }
+  .verdict:hover {
+    transform: translateY(-3px);
+    border-color: var(--border-strong);
+  }
+  .verdict-emoji {
+    font-size: 42px;
+    line-height: 1;
+    margin-bottom: 14px;
+    display: block;
+  }
+  .verdict-label {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+  .verdict-desc {
+    color: var(--ink-mute);
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .v-go { color: #22c55e; }
+  .v-warn { color: #eab308; }
+  .v-block { color: #f97316; }
+  .v-stop { color: #ef4444; }
+  .v-out { color: #6b7280; }
+
+  /* ===== BAREMA / EIXOS ===== */
+  .eixos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .eixo {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 28px 24px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.25s, transform 0.25s;
+  }
+  .eixo::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-soft);
+    opacity: 0;
+    transition: opacity 0.25s;
+    pointer-events: none;
+  }
+  .eixo:hover::before { opacity: 1; }
+  .eixo:hover { transform: translateY(-3px); border-color: var(--border-strong); }
+  .eixo-tag {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--secondary);
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+  .eixo h4 {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    position: relative;
+    z-index: 1;
+  }
+  .eixo p {
+    color: var(--ink-dim);
+    font-size: 14px;
+    line-height: 1.55;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ===== FEATURES (two-col) ===== */
+  .features {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .features-text h2 {
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: clamp(28px, 3.6vw, 40px);
+    line-height: 1.1;
+    margin-bottom: 24px;
+  }
+  .features-text p {
+    color: var(--ink-dim);
+    font-size: 17px;
+    margin-bottom: 28px;
+  }
+  .check-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .check-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    color: var(--ink);
+    font-size: 15px;
+  }
+  .check-list .check {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    border-radius: 6px;
+    background: var(--gradient);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1px;
+  }
+  .check-list .check svg { width: 12px; height: 12px; color: var(--ink); }
+
+  /* mock card */
+  .mock-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 28px;
+    box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
+    position: relative;
+  }
+  .mock-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 22px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--border);
+  }
+  .mock-title {
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+  }
+  .mock-badge {
+    background: rgba(34, 197, 94, 0.12);
+    color: #22c55e;
+    border: 1px solid rgba(34, 197, 94, 0.3);
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mock-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+  }
+  .mock-row:last-of-type { border-bottom: none; }
+  .mock-row span:first-child { color: var(--ink-dim); }
+  .mock-row span:last-child {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  .mock-score {
+    margin-top: 18px;
+    padding-top: 18px;
+    border-top: 1px solid var(--border-strong);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .mock-score-label {
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    color: var(--ink-dim);
+  }
+  .mock-score-val {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: 42px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+  }
+
+  /* ===== FINAL CTA ===== */
+  .cta-final {
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-final::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at center, rgba(234, 52, 139, 0.14) 0%, transparent 60%);
+    filter: blur(40px);
+    pointer-events: none;
+  }
+  .cta-box {
+    position: relative;
+    background: var(--bg-card);
+    border: 1px solid var(--border-strong);
+    border-radius: 24px;
+    padding: 64px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .cta-box::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 24px;
+    padding: 1px;
+    background: var(--gradient);
+    -webkit-mask: linear-gradient(#14141a 0 0) content-box, linear-gradient(#14141a 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    opacity: 0.4;
+  }
+  .cta-box h2 {
+    font-family: 'Orbitron', sans-serif;
+    text-transform: uppercase;
+    font-weight: 800;
+    font-size: clamp(28px, 4vw, 44px);
+    line-height: 1.1;
+    margin-bottom: 18px;
+  }
+  .cta-box p {
+    color: var(--ink-dim);
+    font-size: 17px;
+    margin-bottom: 32px;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cta-actions {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    padding: 56px 0 40px;
+    border-top: 1px solid var(--border);
+    color: var(--ink-mute);
+    font-size: 14px;
+  }
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+  .footer-logo img { width: 24px; height: 24px; }
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    flex-wrap: wrap;
+  }
+  .footer-links a { color: var(--ink-dim); transition: color 0.2s; }
+  .footer-links a:hover { color: var(--ink); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    nav ul { display: none; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+    .steps { grid-template-columns: 1fr; }
+    .semaforo-grid { grid-template-columns: repeat(2, 1fr); }
+    .features { grid-template-columns: 1fr; gap: 40px; }
+    section { padding: 64px 0; }
+    .hero { padding: 64px 0 72px; }
+    .cta-box { padding: 48px 28px; }
+  }
+  @media (max-width: 520px) {
+    .semaforo-grid { grid-template-columns: 1fr; }
+    .header-inner { padding: 14px 0; }
+    .logo { font-size: 13px; }
+    .logo img { width: 28px; height: 28px; }
+    .hero-meta { gap: 12px; font-size: 12px; }
+    .hero-meta .dot { display: none; }
+    .btn { padding: 11px 18px; font-size: 12px; }
+    .btn-lg { padding: 14px 24px; font-size: 13px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="#" class="logo" aria-label="Edital Inteligente">
+      <img src="brand/gradient-symbol.svg" alt="">
+      <span class="logo-text">Edital <span class="accent">Inteligente</span></span>
+    </a>
+    <nav aria-label="Principal">
+      <ul>
+        <li><a href="#como-funciona">Como funciona</a></li>
+        <li><a href="#veredito">Veredito</a></li>
+        <li><a href="#barema">Barema</a></li>
+        <li><a href="#para-quem">Para quem</a></li>
+      </ul>
+    </nav>
+    <a href="https://editais.garagem.dev.br" class="btn btn-primary" rel="noopener">
+      Acessar plataforma
+    </a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ===== HERO ===== -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <span class="pill"><span class="pill-dot"></span>Plataforma em produção</span>
+      <h1 class="display">
+        <span class="line">Pare de ler edital</span>
+        <span class="line gradient-text">de 80 páginas</span>
+      </h1>
+      <p class="hero-sub">
+        Sobe o PDF ou cola o link. A IA cruza com o seu <strong>perfil técnico</strong> e o <strong>Barema Garagem v1.0</strong>, e devolve em minutos: <strong>veredito em semáforo</strong>, pontos cegos, riscos e os próximos passos.
+      </p>
+      <div class="hero-ctas">
+        <a href="https://editais.garagem.dev.br" class="btn btn-primary btn-lg">
+          Acessar plataforma
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#como-funciona" class="btn btn-ghost btn-lg">Ver como funciona</a>
+      </div>
+      <div class="hero-meta">
+        <span>Análise em ~3min</span>
+        <span class="dot"></span>
+        <span>Veredito acionável</span>
+        <span class="dot"></span>
+        <span>Auditável fim-a-fim</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== STATS ===== -->
+  <section class="stats" style="padding-top: 56px; padding-bottom: 56px;">
+    <div class="container">
+      <div class="stats-grid">
+        <div>
+          <div class="stat-num">5</div>
+          <div class="stat-label">Eixos do Barema</div>
+        </div>
+        <div>
+          <div class="stat-num">~3min</div>
+          <div class="stat-label">por análise</div>
+        </div>
+        <div>
+          <div class="stat-num">100%</div>
+          <div class="stat-label">Auditável</div>
+        </div>
+        <div>
+          <div class="stat-num">5</div>
+          <div class="stat-label">Níveis de veredito</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== COMO FUNCIONA ===== -->
+  <section id="como-funciona">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Como funciona</div>
+        <h2>Do PDF ao veredito em 3 passos</h2>
+        <p>Sem planilha. Sem leitura manual. Sem achismo.</p>
+      </div>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">01</div>
+          <h3>Sobe o edital</h3>
+          <p>Upload do PDF ou cola a URL da chamada. O scraper baixa, normaliza e indexa o documento — mesmo os anexos.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">02</div>
+          <h3>IA analisa</h3>
+          <p>Cruza o edital com seu perfil técnico, histórico e inventário. Aplica o Barema Garagem v1.0 nos 5 eixos.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">03</div>
+          <h3>Veredito acionável</h3>
+          <p>Semáforo 🟢🟡🟠🔴⚫ com justificativa por eixo, riscos, pendências e próximos passos prontos pra executar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SEMAFORO ===== -->
+  <section id="veredito" class="semaforo-section">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Veredito em semáforo</div>
+        <h2>Cinco respostas. Zero ambiguidade.</h2>
+        <p>Cada análise termina num veredito direto. Sem relatório de 40 páginas que ninguém vai ler.</p>
+      </div>
+      <div class="semaforo-grid">
+        <div class="verdict">
+          <span class="verdict-emoji">🟢</span>
+          <div class="verdict-label v-go">Aplicar já</div>
+          <div class="verdict-desc">Aderência alta nos 5 eixos. Toca a montar a proposta.</div>
+        </div>
+        <div class="verdict">
+          <span class="verdict-emoji">🟡</span>
+          <div class="verdict-label v-warn">Aplicar com ajuste</div>
+          <div class="verdict-desc">Aderência boa, mas tem pendências que precisam ser endereçadas.</div>
+        </div>
+        <div class="verdict">
+          <span class="verdict-emoji">🟠</span>
+          <div class="verdict-label v-block">Bloqueios sérios</div>
+          <div class="verdict-desc">Há riscos materiais. Avaliar custo/benefício antes de seguir.</div>
+        </div>
+        <div class="verdict">
+          <span class="verdict-emoji">🔴</span>
+          <div class="verdict-label v-stop">Não aplicar</div>
+          <div class="verdict-desc">Baixa aderência ou requisitos eliminatórios não atendidos.</div>
+        </div>
+        <div class="verdict">
+          <span class="verdict-emoji">⚫</span>
+          <div class="verdict-label v-out">Fora de escopo</div>
+          <div class="verdict-desc">Edital não compatível com o perfil técnico cadastrado.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== BAREMA / EIXOS ===== -->
+  <section id="barema">
+    <div class="container">
+      <div class="section-head">
+        <div class="eyebrow">Barema Garagem v1.0</div>
+        <h2>Cinco eixos, um veredito</h2>
+        <p>Avaliação estruturada. Toda nota tem justificativa rastreável até o trecho do edital.</p>
+      </div>
+      <div class="eixos">
+        <div class="eixo">
+          <div class="eixo-tag">Eixo 01</div>
+          <h4>Aderência temática</h4>
+          <p>O objeto do edital conversa com o que a sua organização efetivamente faz e entrega.</p>
+        </div>
+        <div class="eixo">
+          <div class="eixo-tag">Eixo 02</div>
+          <h4>Elegibilidade jurídica</h4>
+          <p>Natureza jurídica, tempo de existência, certidões, inscrições — bloqueadores formais.</p>
+        </div>
+        <div class="eixo">
+          <div class="eixo-tag">Eixo 03</div>
+          <h4>Capacidade técnica</h4>
+          <p>Histórico, equipe, infraestrutura e portfólio cruzados com o que o edital exige.</p>
+        </div>
+        <div class="eixo">
+          <div class="eixo-tag">Eixo 04</div>
+          <h4>Viabilidade financeira</h4>
+          <p>Teto, contrapartida, fluxo de caixa e regras de prestação de contas.</p>
+        </div>
+        <div class="eixo">
+          <div class="eixo-tag">Eixo 05</div>
+          <h4>Risco e prazo</h4>
+          <p>Cronograma, marcos, multas, exclusividade e tudo que pode te atrapalhar.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURES ===== -->
+  <section id="para-quem" class="semaforo-section">
+    <div class="container">
+      <div class="features">
+        <div class="features-text">
+          <div class="eyebrow">Para quem</div>
+          <h2>Pensado pra quem capta de verdade</h2>
+          <p>Coordenação de projetos, captação, jurídico e diretoria — todo mundo olhando o mesmo veredito, com a mesma justificativa.</p>
+          <ul class="check-list">
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Perfil técnico vivo — atualiza uma vez, vale pra toda análise</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Inventário de documentos rastreado e versionado</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Comparativo lado a lado entre editais</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Pipeline de captação com prazos e responsáveis</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Auditoria fim-a-fim — toda decisão é rastreável</span>
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div class="mock-card" aria-hidden="true">
+            <div class="mock-head">
+              <span class="mock-title">Veredito · Edital 47/2025</span>
+              <span class="mock-badge">
+                <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;box-shadow:0 0 10px #22c55e;"></span>
+                Aplicar já
+              </span>
+            </div>
+            <div class="mock-row"><span>Aderência temática</span><span class="gradient-text">9.2 / 10</span></div>
+            <div class="mock-row"><span>Elegibilidade jurídica</span><span class="gradient-text">10 / 10</span></div>
+            <div class="mock-row"><span>Capacidade técnica</span><span class="gradient-text">8.6 / 10</span></div>
+            <div class="mock-row"><span>Viabilidade financeira</span><span class="gradient-text">7.8 / 10</span></div>
+            <div class="mock-row"><span>Risco e prazo</span><span class="gradient-text">8.0 / 10</span></div>
+            <div class="mock-score">
+              <span class="mock-score-label">Nota Garagem</span>
+              <span class="mock-score-val">8.7</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== CTA FINAL ===== -->
+  <section class="cta-final">
+    <div class="container">
+      <div class="cta-box">
+        <h2>Próximo edital, sem suor</h2>
+        <p>Sobe o PDF, sai com veredito. Próximos passos prontos. Time alinhado. Decisão em minutos, não em semanas.</p>
+        <div class="cta-actions">
+          <a href="https://editais.garagem.dev.br" class="btn btn-primary btn-lg">
+            Acessar plataforma
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+          </a>
+          <a href="mailto:contato@garagem.dev.br?subject=Edital%20Inteligente%20-%20Demo" class="btn btn-ghost btn-lg">Falar com a Garagem</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="container footer-inner">
+    <div class="footer-logo">
+      <img src="brand/gradient-symbol.svg" alt="">
+      <span>Edital Inteligente · Garagem</span>
+    </div>
+    <ul class="footer-links">
+      <li><a href="https://editais.garagem.dev.br">Plataforma</a></li>
+      <li><a href="https://garagem.dev.br">Garagem</a></li>
+      <li><a href="mailto:contato@garagem.dev.br">Contato</a></li>
+    </ul>
+    <div>© <span id="year">2026</span> Garagem · Todos os direitos reservados</div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+</script>
+
+</body>
+</html>

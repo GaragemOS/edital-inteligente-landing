@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="210mm" height="297mm" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 21000 21000"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .fil0 {fill:url(#id0)}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="2468.95" y1="17001.87" x2="18237.45" y2="4000.63">
+   <stop offset="0" style="stop-opacity:1; stop-color:#EA348B"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#D93030"/>
+  </linearGradient>
+ </defs>
+ <g id="Camada_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <path class="fil0" d="M10488.05 21001.24l3952.03 0c3264.89,0 5935.97,-2671.07 5935.97,-5935.97 0,-1904.26 -63.08,-3885.63 -1871.71,-5740.81 -1116.61,-1145.36 -2619.18,-1812.17 -4228.85,-1783.42l-8065.13 144.75c-1968.39,-115.75 -3421.61,1589.07 -3387.76,3484.7 30.26,1688.02 1245.09,3218.06 2932.86,3365.36l8643.18 -149.33c5900.85,-101.77 4613.51,5675.94 4.05,5675.94l-3914.63 0c-4787.81,0 -8731.46,-3815.18 -8940.33,-8554.12 0,-2938.47 2571.85,-5127.42 5424.59,-5127.42 2939.22,0 4611.22,10.16 7549.69,10.16 1780.9,0 3434.32,-1328.02 3434.32,-3194.92 0,-1853.9 -1639.93,-3194.9 -3434.32,-3194.9l-137.63 0c-1840.67,0.25 -2412.59,4.33 -4253.78,7.12 -6484.46,233.54 -9799.99,5571.13 -9519.87,11566.61 246.27,5260.75 4631.07,9426.25 9877.33,9426.25zm-4348.68 -11926.36c1120.94,0 2029.69,908.52 2029.69,2029.71 0,1120.94 -908.75,2029.69 -2029.69,2029.69 -1120.96,0 -2029.46,-908.75 -2029.46,-2029.69 0,-1121.19 908.5,-2029.71 2029.46,-2029.71zm8336.85 -7929.01c1120.94,0 2029.94,908.75 2029.94,2029.69 0,1120.94 -909.01,2029.71 -2029.94,2029.71 -1120.96,0 -2029.71,-908.77 -2029.71,-2029.71 0,-1120.94 908.75,-2029.69 2029.71,-2029.69z"/>
+ </g>
+</svg>
