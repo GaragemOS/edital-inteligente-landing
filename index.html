@@ -4,10 +4,10 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#14141a">
-<title>Edital Inteligente — análise automatizada de editais de fomento com IA</title>
-<meta name="description" content="A IA da Garagem lê o edital, cruza com o seu perfil técnico e devolve um veredito em semáforo com próximos passos. Pare de perder tempo lendo PDF de 80 páginas.">
-<meta property="og:title" content="Edital Inteligente — análise de editais com IA">
-<meta property="og:description" content="Upload do edital. IA analisa em 5 eixos. Veredito em semáforo. Próximos passos prontos.">
+<title>Edital Inteligente — foque nos editais que realmente importam</title>
+<meta name="description" content="Plataforma de inteligência para captação via editais de fomento. Construímos o dossiê da sua organização, analisamos cada chamada e entregamos veredito acionável, pipeline integrado, agenda e relatórios de performance.">
+<meta property="og:title" content="Edital Inteligente — foque nos editais que realmente importam">
+<meta property="og:description" content="Plataforma completa de inteligência em captação via editais. Do dossiê institucional ao relatório quinzenal de performance — para concentrar energia onde há chance real de conversão.">
 <meta property="og:type" content="website">
 <link rel="icon" type="image/svg+xml" href="brand/gradient-symbol.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -316,14 +316,14 @@
   /* ===== HOW IT WORKS ===== */
   .steps {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
   }
   .step {
     background: var(--bg-card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 32px 28px;
+    padding: 30px 24px;
     position: relative;
     transition: border-color 0.25s, transform 0.25s;
   }
@@ -334,25 +334,25 @@
   .step-num {
     font-family: 'Orbitron', sans-serif;
     font-weight: 800;
-    font-size: 56px;
+    font-size: 48px;
     background: var(--gradient);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     line-height: 1;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
   .step h3 {
     font-family: 'Orbitron', sans-serif;
     text-transform: uppercase;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 12px;
     letter-spacing: 0.01em;
   }
   .step p {
     color: var(--ink-dim);
-    font-size: 15px;
+    font-size: 14.5px;
     line-height: 1.6;
   }
 
@@ -585,6 +585,182 @@
     line-height: 1;
   }
 
+  /* features reverse (mock à esquerda) */
+  .features.reverse .features-text { order: 2; }
+  .features.reverse .features-visual { order: 1; }
+
+  /* ===== TIMELINE (pipeline) ===== */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 4px;
+  }
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .timeline-item:last-child { border-bottom: none; }
+  .timeline-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--bg-elev);
+    border: 2px solid var(--ink-mute);
+    position: relative;
+    z-index: 1;
+    justify-self: center;
+  }
+  .timeline-item.done .timeline-dot {
+    background: var(--gradient);
+    border-color: transparent;
+    box-shadow: 0 0 12px rgba(234, 52, 139, 0.5);
+  }
+  .timeline-item.current .timeline-dot {
+    background: transparent;
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 4px rgba(234, 52, 139, 0.18);
+  }
+  .timeline-body {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+  }
+  .timeline-stage {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 600;
+    font-size: 12.5px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+  .timeline-meta {
+    font-size: 12.5px;
+    color: var(--ink-mute);
+  }
+  .timeline-date {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11.5px;
+    color: var(--ink-dim);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* ===== FILE LIST (docs) ===== */
+  .file-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    margin-top: 4px;
+  }
+  .file-list li {
+    display: grid;
+    grid-template-columns: 36px 1fr auto;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .file-list li:last-child { border-bottom: none; }
+  .file-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--gradient-soft);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--secondary);
+  }
+  .file-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .file-name {
+    font-size: 13.5px;
+    color: var(--ink);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .file-meta {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10.5px;
+    color: var(--ink-mute);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .file-version {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11px;
+    color: var(--ink-dim);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  /* ===== REPORT MOCK ===== */
+  .report-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  .report-row:last-of-type { border-bottom: none; }
+  .report-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--ink-dim);
+  }
+  .report-value {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    line-height: 1;
+    letter-spacing: -0.01em;
+  }
+  .report-insight {
+    margin-top: 18px;
+    padding: 18px 20px;
+    border-radius: 12px;
+    background: var(--gradient-soft);
+    border: 1px solid var(--border);
+  }
+  .report-insight-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 11.5px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--secondary);
+    margin-bottom: 8px;
+  }
+  .report-insight-text {
+    color: var(--ink);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
   /* ===== FINAL CTA ===== */
   .cta-final {
     text-align: center;
@@ -678,15 +854,22 @@
   .footer-links a:hover { color: var(--ink); }
 
   /* ===== RESPONSIVE ===== */
+  @media (max-width: 1024px) {
+    .steps { grid-template-columns: repeat(2, 1fr); }
+  }
   @media (max-width: 900px) {
     nav ul { display: none; }
     .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
-    .steps { grid-template-columns: 1fr; }
     .semaforo-grid { grid-template-columns: repeat(2, 1fr); }
     .features { grid-template-columns: 1fr; gap: 40px; }
+    .features.reverse .features-text { order: 1; }
+    .features.reverse .features-visual { order: 2; }
     section { padding: 64px 0; }
     .hero { padding: 64px 0 72px; }
     .cta-box { padding: 48px 28px; }
+  }
+  @media (max-width: 600px) {
+    .steps { grid-template-columns: 1fr; }
   }
   @media (max-width: 520px) {
     .semaforo-grid { grid-template-columns: 1fr; }
@@ -697,6 +880,11 @@
     .hero-meta .dot { display: none; }
     .btn { padding: 11px 18px; font-size: 12px; }
     .btn-lg { padding: 14px 24px; font-size: 13px; }
+    .timeline-item { grid-template-columns: 24px 1fr; }
+    .timeline-date { grid-column: 2; font-size: 11px; }
+    .file-list li { grid-template-columns: 32px 1fr; }
+    .file-version { grid-column: 2; justify-self: start; }
+    .report-value { font-size: 26px; }
   }
 </style>
 </head>
@@ -711,8 +899,9 @@
     <nav aria-label="Principal">
       <ul>
         <li><a href="#como-funciona">Como funciona</a></li>
-        <li><a href="#veredito">Veredito</a></li>
         <li><a href="#barema">Barema</a></li>
+        <li><a href="#pipeline">Pipeline</a></li>
+        <li><a href="#relatorios">Relatórios</a></li>
         <li><a href="#para-quem">Para quem</a></li>
       </ul>
     </nav>
@@ -729,11 +918,11 @@
     <div class="container hero-inner">
       <span class="pill"><span class="pill-dot"></span>Plataforma em produção</span>
       <h1 class="display">
-        <span class="line">Pare de ler edital</span>
-        <span class="line gradient-text">de 80 páginas</span>
+        <span class="line">Foque nos editais</span>
+        <span class="line gradient-text">que realmente importam</span>
       </h1>
       <p class="hero-sub">
-        Sobe o PDF ou cola o link. A IA cruza com o seu <strong>perfil técnico</strong> e o <strong>Barema Garagem v1.0</strong>, e devolve em minutos: <strong>veredito em semáforo</strong>, pontos cegos, riscos e os próximos passos.
+        Plataforma de inteligência para captação via editais de fomento. Filtramos, analisamos e priorizamos cada chamada com base no <strong>dossiê da sua organização</strong> e no <strong>Barema Garagem v1.0</strong>, para que sua equipe concentre energia onde há chance real de conversão.
       </p>
       <div class="hero-ctas">
         <a href="https://editais.garagem.dev.br" class="btn btn-primary btn-lg">
@@ -743,7 +932,7 @@
         <a href="#como-funciona" class="btn btn-ghost btn-lg">Ver como funciona</a>
       </div>
       <div class="hero-meta">
-        <span>Análise em ~3min</span>
+        <span>Análise estruturada</span>
         <span class="dot"></span>
         <span>Veredito acionável</span>
         <span class="dot"></span>
@@ -781,24 +970,29 @@
     <div class="container">
       <div class="section-head">
         <div class="eyebrow">Como funciona</div>
-        <h2>Do PDF ao veredito em 3 passos</h2>
-        <p>Sem planilha. Sem leitura manual. Sem achismo.</p>
+        <h2>Do dossiê ao veredito em quatro etapas</h2>
+        <p>Um fluxo estruturado que parte do conhecimento profundo da organização e termina em decisão acionável.</p>
       </div>
       <div class="steps">
         <div class="step">
           <div class="step-num">01</div>
-          <h3>Sobe o edital</h3>
-          <p>Upload do PDF ou cola a URL da chamada. O scraper baixa, normaliza e indexa o documento — mesmo os anexos.</p>
+          <h3>Dossiê da organização</h3>
+          <p>A plataforma constrói um perfil completo da empresa: dados cadastrais, portfólio técnico, certidões, histórico de captação e documentação institucional. Esse dossiê é a base de todas as análises.</p>
         </div>
         <div class="step">
           <div class="step-num">02</div>
-          <h3>IA analisa</h3>
-          <p>Cruza o edital com seu perfil técnico, histórico e inventário. Aplica o Barema Garagem v1.0 nos 5 eixos.</p>
+          <h3>Ingestão do edital</h3>
+          <p>Upload do PDF ou indicação da URL da chamada. O sistema baixa, normaliza e indexa todo o conteúdo do edital, incluindo seus anexos.</p>
         </div>
         <div class="step">
           <div class="step-num">03</div>
+          <h3>Análise pela IA</h3>
+          <p>Cruzamento do edital com o dossiê da organização. O Barema Garagem v1.0 é aplicado aos cinco eixos, gerando nota e justificativa rastreável para cada um.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">04</div>
           <h3>Veredito acionável</h3>
-          <p>Semáforo 🟢🟡🟠🔴⚫ com justificativa por eixo, riscos, pendências e próximos passos prontos pra executar.</p>
+          <p>Semáforo 🟢🟡🟠🔴⚫ com justificativa por eixo, riscos identificados, pendências e próximos passos prontos para execução pela equipe.</p>
         </div>
       </div>
     </div>
@@ -810,23 +1004,23 @@
       <div class="section-head">
         <div class="eyebrow">Veredito em semáforo</div>
         <h2>Cinco respostas. Zero ambiguidade.</h2>
-        <p>Cada análise termina num veredito direto. Sem relatório de 40 páginas que ninguém vai ler.</p>
+        <p>Cada análise termina em um veredito direto, com justificativa rastreável até o trecho do edital.</p>
       </div>
       <div class="semaforo-grid">
         <div class="verdict">
           <span class="verdict-emoji">🟢</span>
-          <div class="verdict-label v-go">Aplicar já</div>
-          <div class="verdict-desc">Aderência alta nos 5 eixos. Toca a montar a proposta.</div>
+          <div class="verdict-label v-go">Aplicar</div>
+          <div class="verdict-desc">Aderência alta nos cinco eixos. Mobilizar a equipe para a proposta.</div>
         </div>
         <div class="verdict">
           <span class="verdict-emoji">🟡</span>
           <div class="verdict-label v-warn">Aplicar com ajuste</div>
-          <div class="verdict-desc">Aderência boa, mas tem pendências que precisam ser endereçadas.</div>
+          <div class="verdict-desc">Aderência consistente, com pendências documentais ou técnicas a endereçar.</div>
         </div>
         <div class="verdict">
           <span class="verdict-emoji">🟠</span>
           <div class="verdict-label v-block">Bloqueios sérios</div>
-          <div class="verdict-desc">Há riscos materiais. Avaliar custo/benefício antes de seguir.</div>
+          <div class="verdict-desc">Riscos materiais identificados. Avaliar custo-benefício antes de prosseguir.</div>
         </div>
         <div class="verdict">
           <span class="verdict-emoji">🔴</span>
@@ -836,7 +1030,7 @@
         <div class="verdict">
           <span class="verdict-emoji">⚫</span>
           <div class="verdict-label v-out">Fora de escopo</div>
-          <div class="verdict-desc">Edital não compatível com o perfil técnico cadastrado.</div>
+          <div class="verdict-desc">Edital não compatível com o perfil técnico da organização.</div>
         </div>
       </div>
     </div>
@@ -848,18 +1042,18 @@
       <div class="section-head">
         <div class="eyebrow">Barema Garagem v1.0</div>
         <h2>Cinco eixos, um veredito</h2>
-        <p>Avaliação estruturada. Toda nota tem justificativa rastreável até o trecho do edital.</p>
+        <p>Avaliação estruturada. Toda nota tem justificativa rastreável até o trecho do edital que a fundamenta.</p>
       </div>
       <div class="eixos">
         <div class="eixo">
           <div class="eixo-tag">Eixo 01</div>
           <h4>Aderência temática</h4>
-          <p>O objeto do edital conversa com o que a sua organização efetivamente faz e entrega.</p>
+          <p>O objeto do edital conversa com o que a organização efetivamente faz e entrega.</p>
         </div>
         <div class="eixo">
           <div class="eixo-tag">Eixo 02</div>
           <h4>Elegibilidade jurídica</h4>
-          <p>Natureza jurídica, tempo de existência, certidões, inscrições — bloqueadores formais.</p>
+          <p>Natureza jurídica, tempo de existência, certidões e inscrições — bloqueadores formais.</p>
         </div>
         <div class="eixo">
           <div class="eixo-tag">Eixo 03</div>
@@ -874,36 +1068,274 @@
         <div class="eixo">
           <div class="eixo-tag">Eixo 05</div>
           <h4>Risco e prazo</h4>
-          <p>Cronograma, marcos, multas, exclusividade e tudo que pode te atrapalhar.</p>
+          <p>Cronograma, marcos, multas, exclusividade e demais condicionantes de execução.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PIPELINE + AGENDA ===== -->
+  <section id="pipeline" class="semaforo-section">
+    <div class="container">
+      <div class="features">
+        <div class="features-text">
+          <div class="eyebrow">Gestão integrada</div>
+          <h2>Pipeline de captação com agenda integrada</h2>
+          <p>Acompanhe cada oportunidade do mapeamento à prestação de contas. Datas críticas, ações e responsáveis em um único painel.</p>
+          <ul class="check-list">
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Pipeline completo com status e responsável por etapa</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Agenda com datas de publicação, esclarecimentos, entrega e resultado</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Ações sugeridas em cada etapa do ciclo da captação</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Visão consolidada de todos os editais em andamento</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Alertas automáticos para prazos críticos</span>
+            </li>
+          </ul>
+        </div>
+        <div class="features-visual">
+          <div class="mock-card" aria-hidden="true">
+            <div class="mock-head">
+              <span class="mock-title">Edital 47/2025 · Pipeline</span>
+              <span class="mock-badge">
+                <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;box-shadow:0 0 10px #22c55e;"></span>
+                Em curso
+              </span>
+            </div>
+            <div class="timeline">
+              <div class="timeline-item done">
+                <div class="timeline-dot"></div>
+                <div class="timeline-body">
+                  <div class="timeline-stage">Publicação</div>
+                  <div class="timeline-meta">Mapeamento · Marina C.</div>
+                </div>
+                <div class="timeline-date">14 abr</div>
+              </div>
+              <div class="timeline-item done">
+                <div class="timeline-dot"></div>
+                <div class="timeline-body">
+                  <div class="timeline-stage">Análise de risco</div>
+                  <div class="timeline-meta">Veredito 🟢 · Diretoria</div>
+                </div>
+                <div class="timeline-date">22 abr</div>
+              </div>
+              <div class="timeline-item current">
+                <div class="timeline-dot"></div>
+                <div class="timeline-body">
+                  <div class="timeline-stage">Esclarecimentos</div>
+                  <div class="timeline-meta">Em revisão · Jurídico</div>
+                </div>
+                <div class="timeline-date">05 mai</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-body">
+                  <div class="timeline-stage">Entrega da proposta</div>
+                  <div class="timeline-meta">Pendente · Captação</div>
+                </div>
+                <div class="timeline-date">28 mai</div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-dot"></div>
+                <div class="timeline-body">
+                  <div class="timeline-stage">Divulgação do resultado</div>
+                  <div class="timeline-meta">Aguardando</div>
+                </div>
+                <div class="timeline-date">15 jul</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== DOCUMENTAÇÃO CENTRALIZADA ===== -->
+  <section id="documentacao">
+    <div class="container">
+      <div class="features reverse">
+        <div class="features-text">
+          <div class="eyebrow">Documentação centralizada</div>
+          <h2>Cada oportunidade tem sua pasta</h2>
+          <p>Todo o material da oportunidade — edital, anexos, minutas, comprovantes e pareceres — em um repositório único, versionado e auditável.</p>
+          <ul class="check-list">
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Editais, anexos e minutas de proposta em um só lugar</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Comprovantes, certidões e pareceres jurídicos vinculados</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Versionamento automático de cada documento</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Acesso controlado por equipe — captação, jurídico e diretoria</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Trilha de auditoria — quem acessou, quando e o que alterou</span>
+            </li>
+          </ul>
+        </div>
+        <div class="features-visual">
+          <div class="mock-card" aria-hidden="true">
+            <div class="mock-head">
+              <span class="mock-title">Pasta · Edital 47/2025</span>
+              <span class="mock-badge">
+                <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;box-shadow:0 0 10px #22c55e;"></span>
+                12 documentos
+              </span>
+            </div>
+            <ul class="file-list">
+              <li>
+                <span class="file-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                <div class="file-info">
+                  <span class="file-name">Edital_47-2025.pdf</span>
+                  <span class="file-meta">PDF · 2.4 MB</span>
+                </div>
+                <span class="file-version">v1</span>
+              </li>
+              <li>
+                <span class="file-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                <div class="file-info">
+                  <span class="file-name">Anexo_I_termo_referencia.pdf</span>
+                  <span class="file-meta">PDF · 880 KB</span>
+                </div>
+                <span class="file-version">v1</span>
+              </li>
+              <li>
+                <span class="file-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                <div class="file-info">
+                  <span class="file-name">Minuta_proposta_tecnica.docx</span>
+                  <span class="file-meta">DOCX · Captação</span>
+                </div>
+                <span class="file-version">v3</span>
+              </li>
+              <li>
+                <span class="file-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                <div class="file-info">
+                  <span class="file-name">Parecer_juridico.pdf</span>
+                  <span class="file-meta">PDF · Jurídico</span>
+                </div>
+                <span class="file-version">v2</span>
+              </li>
+              <li>
+                <span class="file-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></span>
+                <div class="file-info">
+                  <span class="file-name">Planilha_orcamentaria.xlsx</span>
+                  <span class="file-meta">XLSX · Financeiro</span>
+                </div>
+                <span class="file-version">v2</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== RELATÓRIOS QUINZENAIS ===== -->
+  <section id="relatorios" class="semaforo-section">
+    <div class="container">
+      <div class="features">
+        <div class="features-text">
+          <div class="eyebrow">Inteligência aplicada</div>
+          <h2>Relatórios quinzenais de performance</h2>
+          <p>A cada quinze dias, a plataforma entrega um diagnóstico sobre os padrões de captação da organização — onde há ganho, onde há perda e como aumentar a taxa de conversão na próxima rodada.</p>
+          <ul class="check-list">
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Diagnóstico das principais causas de não-conversão</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Padrões dos eixos do Barema que mais reprovam propostas</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Tipos de edital com maior taxa de sucesso histórica</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Recomendações acionáveis para a próxima rodada</span>
+            </li>
+            <li>
+              <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
+              <span>Evolução histórica da performance em captação</span>
+            </li>
+          </ul>
+        </div>
+        <div class="features-visual">
+          <div class="mock-card" aria-hidden="true">
+            <div class="mock-head">
+              <span class="mock-title">Quinzena 11 · 16-31 mai</span>
+              <span class="mock-badge">
+                <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;box-shadow:0 0 10px #22c55e;"></span>
+                Pronto
+              </span>
+            </div>
+            <div class="report-row">
+              <span class="report-label">Editais analisados</span>
+              <span class="report-value">28</span>
+            </div>
+            <div class="report-row">
+              <span class="report-label">Submissões realizadas</span>
+              <span class="report-value">7</span>
+            </div>
+            <div class="report-row">
+              <span class="report-label">Taxa de conversão</span>
+              <span class="report-value">43%</span>
+            </div>
+            <div class="report-insight">
+              <div class="report-insight-title">Principal causa de perda</div>
+              <p class="report-insight-text">Capacidade técnica (Eixo 03) reprovou 60% das submissões. Recomendação: revisar narrativa do portfólio antes da próxima rodada.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ===== FEATURES ===== -->
-  <section id="para-quem" class="semaforo-section">
+  <section id="para-quem">
     <div class="container">
       <div class="features">
         <div class="features-text">
           <div class="eyebrow">Para quem</div>
-          <h2>Pensado pra quem capta de verdade</h2>
-          <p>Coordenação de projetos, captação, jurídico e diretoria — todo mundo olhando o mesmo veredito, com a mesma justificativa.</p>
+          <h2>Construído para quem capta de forma profissional</h2>
+          <p>Coordenação de projetos, captação, jurídico e diretoria — uma fonte única de verdade, com o mesmo veredito e a mesma justificativa para todos.</p>
           <ul class="check-list">
             <li>
               <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Perfil técnico vivo — atualiza uma vez, vale pra toda análise</span>
+              <span>Dossiê institucional sempre atualizado e reutilizável</span>
             </li>
             <li>
               <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Inventário de documentos rastreado e versionado</span>
+              <span>Pipeline e agenda compartilhados por toda a equipe</span>
             </li>
             <li>
               <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Comparativo lado a lado entre editais</span>
+              <span>Documentação versionada com acesso por perfil</span>
             </li>
             <li>
               <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
-              <span>Pipeline de captação com prazos e responsáveis</span>
+              <span>Relatórios quinzenais de performance e aprendizados</span>
             </li>
             <li>
               <span class="check"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>
@@ -911,13 +1343,13 @@
             </li>
           </ul>
         </div>
-        <div>
+        <div class="features-visual">
           <div class="mock-card" aria-hidden="true">
             <div class="mock-head">
               <span class="mock-title">Veredito · Edital 47/2025</span>
               <span class="mock-badge">
                 <span style="width:7px;height:7px;border-radius:50%;background:#22c55e;display:inline-block;box-shadow:0 0 10px #22c55e;"></span>
-                Aplicar já
+                Aplicar
               </span>
             </div>
             <div class="mock-row"><span>Aderência temática</span><span class="gradient-text">9.2 / 10</span></div>
@@ -939,8 +1371,8 @@
   <section class="cta-final">
     <div class="container">
       <div class="cta-box">
-        <h2>Próximo edital, sem suor</h2>
-        <p>Sobe o PDF, sai com veredito. Próximos passos prontos. Time alinhado. Decisão em minutos, não em semanas.</p>
+        <h2>Concentre energia nas oportunidades certas</h2>
+        <p>Plataforma em produção, atendendo organizações que captam recursos via editais de fomento. Vamos conversar sobre o seu portfólio de oportunidades.</p>
         <div class="cta-actions">
           <a href="https://editais.garagem.dev.br" class="btn btn-primary btn-lg">
             Acessar plataforma
