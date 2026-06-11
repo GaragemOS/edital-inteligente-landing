@@ -26,11 +26,14 @@ backend, no framework, and no build step: the entire site is one self-contained 
   comment and anchored by `id` (`como-funciona`, `veredito`, `barema`, `pipeline`, `documentacao`,
   `relatorios`, `para-quem`). The sticky header nav links to these anchors. Edit a section by finding
   its comment banner.
-- **`brand/`** — the brand symbol in SVG: `symbol.svg` (uses `currentColor`, inlined via an SVG
-  `<symbol id="brand-mark">` sprite so the header/footer marks tint with the theme) plus fixed-color
-  variants `symbol-teal.svg` (favicon), `symbol-navy.svg`, `symbol-white.svg`. The "EDITAL /
-  inteligente" wordmark is live text (Orbitron + Funnel Display), not a vector asset. Served static
-  and cached 7d by nginx. Source of truth: `src/logos/id - Edital Inteligente.pdf` (CorelDRAW export).
+- **`brand/`** — vector brand kit extracted from the PDF: `symbol`, `horizontal` (symbol + wordmark)
+  and `vertical` (stacked) lockups, each as a `currentColor` master plus fixed tints
+  `-teal/-navy/-white/-black`. The page itself inlines only the symbol (`symbol.svg`, via an SVG
+  `<symbol id="brand-mark">` sprite so the header/footer marks tint with the theme) and recomposes the
+  "EDITAL / inteligente" wordmark as live text (Orbitron + Funnel Display); the standalone `horizontal`/
+  `vertical` SVGs carry the wordmark as outlines for og:image, print, or font-less contexts.
+  `symbol-teal.svg` is the favicon. Served static and cached 7d by nginx. Source of truth:
+  `src/logos/id - Edital Inteligente.pdf` (CorelDRAW export).
 
 ## Serving & deployment
 

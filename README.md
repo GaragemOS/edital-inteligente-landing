@@ -29,7 +29,7 @@ separados.
 | Arquivo / diretório            | Função                                                                 |
 | ------------------------------ | ---------------------------------------------------------------------- |
 | `index.html`                   | Site completo: marcação, design system (CSS inline) e script de rodapé |
-| `brand/`                       | Símbolo da marca em SVG: `symbol.svg` (currentColor) + variantes `symbol-teal/navy/white.svg` |
+| `brand/`                       | Kit da marca em SVG: `symbol`, `horizontal` e `vertical` — cada um como master `currentColor` + tintas `-teal/-navy/-white/-black` (extraídos em vetor do PDF) |
 | `Dockerfile`                   | Imagem `nginx:alpine` que serve o site; expõe a porta `8080`           |
 | `docker-entrypoint.sh`         | Substitui `${PORT}` no template do nginx via `envsubst` na inicialização |
 | `nginx/default.conf.template`  | Server block: fallback SPA, headers de segurança, gzip, cache e `/healthz` |
