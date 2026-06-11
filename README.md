@@ -16,9 +16,12 @@ separados.
 - **Sem framework e sem etapa de build:** não há bundler, `package.json` ou
   `node_modules`. A única dependência externa em runtime é o Google Fonts
   (Orbitron + Funnel Display).
-- **Design system** centralizado em CSS custom properties sob `:root` (cores, gradiente,
-  bordas e sombra). Alterações de marca devem ser feitas nas variáveis, não nos pontos de
-  uso.
+- **Design system** centralizado em CSS custom properties (cores, bordas, sombras). O tema
+  claro fica em `:root` e o escuro em `[data-theme="dark"]`; a marca é monocromática (teal
+  `#4CBFAA` + navy `#0E1C3B`, fundos off-white `#F8F1FE` / near-black `#201E1E`), sem
+  gradiente. Alterações de marca devem ser feitas nas variáveis, não nos pontos de uso.
+- **Tema claro/escuro:** alternância no header, persistida em `localStorage` e iniciada por
+  `prefers-color-scheme` (script inline anti-FOUC no `<head>`).
 - **Copy em PT-BR**, com tom formal/institucional (produto B2B/B2G).
 
 ## Estrutura
@@ -26,7 +29,7 @@ separados.
 | Arquivo / diretório            | Função                                                                 |
 | ------------------------------ | ---------------------------------------------------------------------- |
 | `index.html`                   | Site completo: marcação, design system (CSS inline) e script de rodapé |
-| `brand/`                       | Logos em SVG (variantes símbolo/horizontal nas cores gradiente/branco/preto) |
+| `brand/`                       | Símbolo da marca em SVG: `symbol.svg` (currentColor) + variantes `symbol-teal/navy/white.svg` |
 | `Dockerfile`                   | Imagem `nginx:alpine` que serve o site; expõe a porta `8080`           |
 | `docker-entrypoint.sh`         | Substitui `${PORT}` no template do nginx via `envsubst` na inicialização |
 | `nginx/default.conf.template`  | Server block: fallback SPA, headers de segurança, gzip, cache e `/healthz` |

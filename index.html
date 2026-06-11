@@ -3,31 +3,68 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#14141a">
+<meta name="theme-color" content="#0E1C3B">
 <title>Edital Inteligente — foque nos editais que realmente importam</title>
 <meta name="description" content="Plataforma de inteligência para captação via editais de fomento. Construímos o dossiê da sua organização, analisamos cada chamada e entregamos veredito acionável, pipeline integrado, agenda e relatórios de performance.">
 <meta property="og:title" content="Edital Inteligente — foque nos editais que realmente importam">
 <meta property="og:description" content="Plataforma completa de inteligência em captação via editais. Do dossiê institucional ao relatório quinzenal de performance — para concentrar energia onde há chance real de conversão.">
 <meta property="og:type" content="website">
-<link rel="icon" type="image/svg+xml" href="brand/gradient-symbol.svg">
+<link rel="icon" type="image/svg+xml" href="brand/symbol-teal.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800&family=Funnel+Display:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script>
+  (function () {
+    var t;
+    try { t = localStorage.getItem('theme'); } catch (e) {}
+    if (!t) {
+      try { t = matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark'; }
+      catch (e) { t = 'dark'; }
+    }
+    document.documentElement.setAttribute('data-theme', t);
+    var m = document.querySelector('meta[name="theme-color"]');
+    if (m) m.setAttribute('content', t === 'dark' ? '#0E1C3B' : '#F8F1FE');
+  })();
+</script>
 <style>
   :root {
-    --bg: #14141a;
-    --bg-elev: #1c1c25;
-    --bg-card: #21212c;
+    --primary: #4CBFAA;
+    --primary-strong: #3AA995;
+    --primary-ink: #0E1C3B;
+    --gradient: #4CBFAA;
+    --gradient-soft: rgba(76, 191, 170, 0.12);
+
+    --bg: #F8F1FE;
+    --bg-elev: #ffffff;
+    --bg-card: #ffffff;
+    --ink: #0E1C3B;
+    --ink-dim: #44506a;
+    --ink-mute: #6e7892;
+    --secondary: #0E1C3B;
+    --border: rgba(14, 28, 59, 0.12);
+    --border-strong: rgba(14, 28, 59, 0.20);
+    --header-bg: rgba(248, 241, 254, 0.82);
+    --hover: rgba(14, 28, 59, 0.05);
+    --glow: rgba(76, 191, 170, 0.18);
+    --shadow-card: 0 24px 60px -34px rgba(14, 28, 59, 0.30);
+    --shadow-glow: 0 18px 50px -20px rgba(76, 191, 170, 0.45);
+  }
+
+  [data-theme="dark"] {
+    --bg: #0E1C3B;
+    --bg-elev: #122a4e;
+    --bg-card: #14284a;
     --ink: #F8F1FE;
-    --ink-dim: #b8b0c4;
-    --ink-mute: #8a8398;
-    --primary: #D93030;
-    --secondary: #EA348B;
-    --gradient: linear-gradient(135deg, #EA348B 0%, #D93030 100%);
-    --gradient-soft: linear-gradient(135deg, rgba(234, 52, 139, 0.12) 0%, rgba(217, 48, 48, 0.12) 100%);
-    --border: rgba(248, 241, 254, 0.08);
-    --border-strong: rgba(248, 241, 254, 0.16);
-    --shadow-glow: 0 20px 60px -20px rgba(217, 48, 48, 0.4);
+    --ink-dim: #c2c9d6;
+    --ink-mute: #8090a8;
+    --secondary: #4CBFAA;
+    --border: rgba(248, 241, 254, 0.10);
+    --border-strong: rgba(248, 241, 254, 0.18);
+    --header-bg: rgba(14, 28, 59, 0.82);
+    --hover: rgba(248, 241, 254, 0.06);
+    --glow: rgba(76, 191, 170, 0.20);
+    --shadow-card: 0 30px 80px -30px rgba(0, 0, 0, 0.55);
+    --shadow-glow: 0 18px 50px -20px rgba(76, 191, 170, 0.40);
   }
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -74,7 +111,7 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: rgba(20, 20, 26, 0.85);
+    background: var(--header-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
@@ -91,20 +128,58 @@
     display: flex;
     align-items: center;
     gap: 12px;
+  }
+  .logo-mark {
+    width: 34px;
+    height: auto;
+    color: var(--primary);
+    flex-shrink: 0;
+  }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.05;
+  }
+  .logo-word {
     font-family: 'Orbitron', sans-serif;
     font-weight: 700;
-    font-size: 15px;
-    letter-spacing: 0.04em;
+    font-size: 16px;
+    letter-spacing: 0.14em;
     text-transform: uppercase;
+    color: var(--ink);
+  }
+  .logo-sub {
+    font-family: 'Funnel Display', sans-serif;
+    font-weight: 400;
+    font-size: 11px;
+    letter-spacing: 0.02em;
+    color: var(--secondary);
+    margin-top: 2px;
   }
 
-  .logo img {
-    width: 32px;
-    height: 32px;
+  .header-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
   }
-
-  .logo-text { color: var(--ink); }
-  .logo-text .accent { background: var(--gradient); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border-strong);
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .theme-toggle:hover { background: var(--hover); }
+  .theme-toggle svg { width: 18px; height: 18px; }
+  .theme-toggle .icon-sun { display: none; }
+  [data-theme="dark"] .theme-toggle .icon-sun { display: block; }
+  [data-theme="dark"] .theme-toggle .icon-moon { display: none; }
 
   nav ul {
     display: flex;
@@ -140,13 +215,13 @@
 
   .btn-primary {
     background: var(--gradient);
-    color: var(--ink);
+    color: var(--primary-ink);
     box-shadow: var(--shadow-glow);
     position: relative;
   }
   .btn-primary:hover {
     transform: translateY(-2px);
-    box-shadow: 0 24px 70px -18px rgba(217, 48, 48, 0.55);
+    box-shadow: 0 24px 70px -18px rgba(76, 191, 170, 0.5);
   }
 
   .btn-ghost {
@@ -154,7 +229,7 @@
     color: var(--ink);
     border: 1px solid var(--border-strong);
   }
-  .btn-ghost:hover { background: rgba(248, 241, 254, 0.05); border-color: var(--ink-dim); }
+  .btn-ghost:hover { background: var(--hover); border-color: var(--ink-dim); }
 
   .btn-lg { padding: 16px 32px; font-size: 14px; }
 
@@ -173,7 +248,7 @@
     transform: translateX(-50%);
     width: 900px;
     height: 600px;
-    background: radial-gradient(ellipse at center, rgba(234, 52, 139, 0.18) 0%, rgba(217, 48, 48, 0.08) 35%, transparent 70%);
+    background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 70%);
     filter: blur(60px);
     pointer-events: none;
     z-index: 0;
@@ -502,7 +577,7 @@
     justify-content: center;
     margin-top: 1px;
   }
-  .check-list .check svg { width: 12px; height: 12px; color: var(--ink); }
+  .check-list .check svg { width: 12px; height: 12px; color: var(--primary-ink); }
 
   /* mock card */
   .mock-card {
@@ -510,7 +585,7 @@
     border: 1px solid var(--border);
     border-radius: 18px;
     padding: 28px;
-    box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.6);
+    box-shadow: var(--shadow-card);
     position: relative;
   }
   .mock-head {
@@ -619,12 +694,12 @@
   .timeline-item.done .timeline-dot {
     background: var(--gradient);
     border-color: transparent;
-    box-shadow: 0 0 12px rgba(234, 52, 139, 0.5);
+    box-shadow: 0 0 12px rgba(76, 191, 170, 0.5);
   }
   .timeline-item.current .timeline-dot {
     background: transparent;
     border-color: var(--secondary);
-    box-shadow: 0 0 0 4px rgba(234, 52, 139, 0.18);
+    box-shadow: 0 0 0 4px rgba(76, 191, 170, 0.18);
   }
   .timeline-body {
     display: flex;
@@ -771,7 +846,7 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at center, rgba(234, 52, 139, 0.14) 0%, transparent 60%);
+    background: radial-gradient(ellipse at center, var(--glow) 0%, transparent 60%);
     filter: blur(40px);
     pointer-events: none;
   }
@@ -843,7 +918,7 @@
     text-transform: uppercase;
     letter-spacing: 0.06em;
   }
-  .footer-logo img { width: 24px; height: 24px; }
+  .footer-logo .footer-mark { width: 26px; height: auto; color: var(--primary); }
   .footer-links {
     display: flex;
     gap: 28px;
@@ -890,11 +965,20 @@
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="brand-mark" viewBox="0 0 83 54.3" fill-rule="evenodd" clip-rule="evenodd">
+    <path d="M 36.62 4.77 L 42.04 4.75 C 48.51 4.75 54.43 9.58 54.43 16.27 C 54.43 23.01 48.46 27.80 42.04 27.80 C 31.44 27.80 33.70 27.91 23.09 27.91 C 15.20 27.91 9.54 28.47 9.19 34.64 C 8.84 40.82 14.32 42.62 22.28 42.62 C 24.50 42.62 30.19 42.83 34.54 42.41 C 45.42 41.35 56.63 35.73 56.63 20.69 C 56.63 8.31 52.63 2.80 37.26 2.80 C 21.89 2.80 4.35 17.91 4.35 34.27 C 4.35 50.63 18.00 48.72 35.96 48.72 C 46.58 48.72 63.03 39.97 63.03 20.40 C 63.03 14.83 67.18 9.65 73.03 9.65 C 80.44 9.65 83.01 14.79 83.00 19.68 C 83.00 29.66 66.75 52.63 41.27 52.10 C 15.78 51.56 0.02 54.27 0.97 34.03 C 1.86 15.05 19.89 0.02 38.82 0.02 C 53.78 0.02 59.99 5.15 59.99 21.05 C 59.99 36.94 45.91 46.22 31.34 46.22 C 16.77 46.22 6.53 46.62 6.53 34.46 C 6.53 22.31 20.41 5.36 36.62 4.77 Z M 79.44 20.55 C 79.44 17.04 76.60 14.19 73.09 14.19 C 69.58 14.19 66.74 17.04 66.74 20.55 C 66.74 24.05 69.58 26.90 73.09 26.90 C 76.60 26.90 79.44 24.05 79.44 20.55 Z M 41.87 23.52 C 37.99 23.56 34.52 19.94 34.52 16.18 C 34.52 12.12 37.81 8.84 41.87 8.84 C 45.92 8.84 49.21 12.12 49.21 16.18 C 49.21 20.39 45.75 23.49 41.87 23.52 Z"/>
+  </symbol>
+</svg>
+
 <header>
   <div class="container header-inner">
     <a href="#" class="logo" aria-label="Edital Inteligente">
-      <img src="brand/gradient-symbol.svg" alt="">
-      <span class="logo-text">Edital <span class="accent">Inteligente</span></span>
+      <svg class="logo-mark" aria-hidden="true"><use href="#brand-mark"/></svg>
+      <span class="logo-text">
+        <span class="logo-word">Edital</span>
+        <span class="logo-sub">inteligente</span>
+      </span>
     </a>
     <nav aria-label="Principal">
       <ul>
@@ -905,9 +989,15 @@
         <li><a href="#para-quem">Para quem</a></li>
       </ul>
     </nav>
-    <a href="https://editais.garagem.dev.br" class="btn btn-primary" rel="noopener">
-      Acessar plataforma
-    </a>
+    <div class="header-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Alternar tema claro/escuro" title="Alternar tema">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+      </button>
+      <a href="https://editais.garagem.dev.br" class="btn btn-primary" rel="noopener">
+        Acessar plataforma
+      </a>
+    </div>
   </div>
 </header>
 
@@ -1389,7 +1479,7 @@
 <footer>
   <div class="container footer-inner">
     <div class="footer-logo">
-      <img src="brand/gradient-symbol.svg" alt="">
+      <svg class="footer-mark" aria-hidden="true"><use href="#brand-mark"/></svg>
       <span>Edital Inteligente · Garagem</span>
     </div>
     <ul class="footer-links">
@@ -1403,6 +1493,23 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    var meta = document.querySelector('meta[name="theme-color"]');
+    function apply(t) {
+      root.setAttribute('data-theme', t);
+      if (meta) meta.setAttribute('content', t === 'dark' ? '#0E1C3B' : '#F8F1FE');
+    }
+    if (btn) {
+      btn.addEventListener('click', function () {
+        var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+        try { localStorage.setItem('theme', next); } catch (e) {}
+        apply(next);
+      });
+    }
+  })();
 </script>
 
 </body>
